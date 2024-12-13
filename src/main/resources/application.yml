@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: fila-hovet-api-poc
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url: jdbc:mysql://localhost/filahovet?serverTimezone=UTC
+    username: root
+    password: root
+  kafka:
+    bootstrap-servers: localhost:9092  # Endereço do broker Kafka
+    consumer:
+      group-id: my-group  # ID do grupo de consumidores
+      auto-offset-reset: earliest  # Estratégia de leitura das mensagens (pode ser "earliest" ou "latest")
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    # Configuração do WebSocket
+    websocket:
+      enabled: true
+      endpoints:
+        - /ws/notifications# Configuração do WebSocket
+  websocket:
+    enabled: true
+    endpoints:
+      - /ws/notifications
