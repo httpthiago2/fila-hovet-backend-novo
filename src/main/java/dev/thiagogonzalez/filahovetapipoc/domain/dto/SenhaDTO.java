@@ -1,5 +1,6 @@
 package dev.thiagogonzalez.filahovetapipoc.domain.dto;
 
+import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.TipoSenha;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Senha;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ public class SenhaDTO {
     private Long ordem;
     private String pet;
     private String tutor;
+    private TipoSenha tipo;
 
 
     public SenhaDTO(Senha senha) {
@@ -19,5 +21,6 @@ public class SenhaDTO {
         this.ordem = senha.getOrdem();
         this.pet = senha.getPet();
         this.tutor = senha.getTutor();
+        this.tipo = senha.getTipo();
     }
 }
