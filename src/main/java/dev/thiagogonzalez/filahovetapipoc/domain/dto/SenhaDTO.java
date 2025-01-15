@@ -1,26 +1,26 @@
 package dev.thiagogonzalez.filahovetapipoc.domain.dto;
 
+import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.SituacaoSenha;
 import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.TipoSenha;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Senha;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
-@Getter
-@Setter
+@Data
 public class SenhaDTO {
-    private String senha;
-    private Long ordem;
-    private String pet;
-    private String tutor;
-    private TipoSenha tipo;
-
+    private String codigo;
+    private String nomePet;
+    private String nomeTutor;
+    private String nomeFila;
+    private TipoSenha tipoSenha;
+    private SituacaoSenha situacao;
 
     public SenhaDTO(Senha senha) {
-        this.senha = senha.getFila().getCodigo().concat(StringUtils.leftPad(senha.getId().toString(), 3, '0'));
-        this.ordem = senha.getOrdem();
-        this.pet = senha.getPet();
-        this.tutor = senha.getTutor();
-        this.tipo = senha.getTipo();
+        this.codigo = senha.getFila().getCodigo().concat(StringUtils.leftPad(senha.getId().toString(), 3, '0'));
+        this.nomePet = senha.getPet();
+        this.nomeTutor = senha.getTutor();
+        this.nomeFila = senha.getFila().getNome();
+        this.tipoSenha = senha.getTipo();
+        this.situacao = senha.getSituacao();
     }
 }

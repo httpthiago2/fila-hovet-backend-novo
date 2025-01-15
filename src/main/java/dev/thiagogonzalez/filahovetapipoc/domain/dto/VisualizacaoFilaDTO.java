@@ -10,6 +10,6 @@ import java.util.List;
 public class VisualizacaoFilaDTO {
     private String nome;
     private String sala;
-    private SenhaDTO senhaAtual;
-    private List<SenhaDTO> senhasAnteriores;
+    private VisualizacaoSenhaDTO senhaAtual;
+    private List<VisualizacaoSenhaDTO> senhasAnteriores;
 }

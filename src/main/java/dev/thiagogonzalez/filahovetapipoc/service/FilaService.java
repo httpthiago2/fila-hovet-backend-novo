@@ -1,14 +1,12 @@
 package dev.thiagogonzalez.filahovetapipoc.service;
 
-import dev.thiagogonzalez.filahovetapipoc.domain.dto.SenhaDTO;
+import dev.thiagogonzalez.filahovetapipoc.domain.dto.VisualizacaoSenhaDTO;
 import dev.thiagogonzalez.filahovetapipoc.domain.dto.VisualizacaoFilaDTO;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Fila;
-import dev.thiagogonzalez.filahovetapipoc.domain.model.Medico;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Senha;
 import dev.thiagogonzalez.filahovetapipoc.domain.repository.FilaRepository;
 import dev.thiagogonzalez.filahovetapipoc.domain.repository.SenhaRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,11 +25,11 @@ public class FilaService {
 
     public VisualizacaoFilaDTO visualizarFila(Long id) {
         Senha senhaEntidade = senhaRepository.findSenhaAtualByIdFila(id);
-        SenhaDTO senhaNova = new SenhaDTO(senhaEntidade);
+        VisualizacaoSenhaDTO senhaNova = new VisualizacaoSenhaDTO(senhaEntidade);
 
-        List<SenhaDTO> senhasAnteriores = senhaRepository.findSenhasAtendidasByIdFila(id)
+        List<VisualizacaoSenhaDTO> senhasAnteriores = senhaRepository.findSenhasAtendidasByIdFila(id)
                 .stream()
-                .map(SenhaDTO::new).toList();
+                .map(VisualizacaoSenhaDTO::new).toList();
 
 
         VisualizacaoFilaDTO visualizacaoFilaDTO = new VisualizacaoFilaDTO();
