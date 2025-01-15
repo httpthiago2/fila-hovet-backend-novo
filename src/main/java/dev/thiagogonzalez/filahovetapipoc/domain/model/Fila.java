@@ -31,6 +31,6 @@ public class Fila {
     private Sala sala;
 
     @ManyToOne
-    @JoinColumn(name = "medico_id")
-    private Medico medico;
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 }

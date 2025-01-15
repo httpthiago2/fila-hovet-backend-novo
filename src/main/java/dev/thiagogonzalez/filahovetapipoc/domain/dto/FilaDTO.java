@@ -18,7 +18,7 @@ public class FilaDTO {
         this.codigo = fila.getCodigo();
         this.nome = fila.getNome();
         this.situacao = fila.getSituacao();
-        this.nomeMedico = fila.getMedico().getNome();
+        this.nomeMedico = fila.getUsuario().getNome();
         this.nomeSala = fila.getSala().getNome();
     }
 }

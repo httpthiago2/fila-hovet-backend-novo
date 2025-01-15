@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Medico {
+public class Usuario {
 
     @EqualsAndHashCode.Include
     @Id
@@ -23,6 +23,6 @@ public class Medico {
 
     private String senha;
 
-    @OneToMany(mappedBy = "medico")
+    @OneToMany(mappedBy = "usuario")
     private List<Fila> filas = new ArrayList<>();
 }

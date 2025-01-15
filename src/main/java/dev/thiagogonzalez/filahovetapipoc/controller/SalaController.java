@@ -28,6 +28,11 @@ public class SalaController {
         return salaService.findAll().stream().map(SalaDTO::new).collect(Collectors.toList());
     }
 
+    @GetMapping("{idSala}")
+    public SalaDTO findById(@PathVariable("idSala") Long idSala) {
+       return new SalaDTO(salaService.findById(idSala));
+    }
+
     @PostMapping
     public ResponseEntity<Sala> save(@RequestBody Sala sala) {
         Sala salaCriada = salaService.save(sala);
