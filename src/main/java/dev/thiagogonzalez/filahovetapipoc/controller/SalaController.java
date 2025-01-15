@@ -30,7 +30,8 @@ public class SalaController {
 
     @PostMapping
     public ResponseEntity<Sala> save(@RequestBody Sala sala) {
-        return new ResponseEntity<>(sala, HttpStatus.CREATED);
+        Sala salaCriada = salaService.save(sala);
+        return new ResponseEntity<>(salaCriada, HttpStatus.CREATED);
     }
 
     @PutMapping("{idSala}")

@@ -2,21 +2,27 @@ package dev.thiagogonzalez.filahovetapipoc.service;
 
 import dev.thiagogonzalez.filahovetapipoc.domain.dto.SenhaDTO;
 import dev.thiagogonzalez.filahovetapipoc.domain.dto.VisualizacaoFilaDTO;
+import dev.thiagogonzalez.filahovetapipoc.domain.model.Fila;
+import dev.thiagogonzalez.filahovetapipoc.domain.model.Medico;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Senha;
+import dev.thiagogonzalez.filahovetapipoc.domain.repository.FilaRepository;
 import dev.thiagogonzalez.filahovetapipoc.domain.repository.SenhaRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class FilaService {
 
-
+    private final FilaRepository filaRepository;
     private final SenhaRepository senhaRepository;
 
-    public FilaService(SenhaRepository senhaRepository) {
+    public FilaService(SenhaRepository senhaRepository, FilaRepository filaRepository) {
         this.senhaRepository = senhaRepository;
+        this.filaRepository = filaRepository;
     }
 
     public VisualizacaoFilaDTO visualizarFila(Long id) {
@@ -35,4 +41,29 @@ public class FilaService {
         visualizacaoFilaDTO.setSenhasAnteriores(senhasAnteriores);
         return visualizacaoFilaDTO;
     }
+
+    public List<Fila> findAll() {
+        return filaRepository.findAll();
+    }
+
+    public Fila findById(Long id) {
+        return filaRepository.findById(id).orElse(null);
+    }
+
+    public Fila save(Fila fila) {
+        return filaRepository.save(fila);
+    }
+
+    public Boolean delete(Long id) {
+
+        try {
+            filaRepository.deleteById(id);
+            return Boolean.TRUE;
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return Boolean.FALSE;
+        }
+    }
+
+
 }

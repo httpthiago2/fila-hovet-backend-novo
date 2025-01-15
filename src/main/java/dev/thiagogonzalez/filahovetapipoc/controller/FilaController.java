@@ -1,12 +1,19 @@
 package dev.thiagogonzalez.filahovetapipoc.controller;
 
+import dev.thiagogonzalez.filahovetapipoc.domain.dto.FilaDTO;
 import dev.thiagogonzalez.filahovetapipoc.domain.dto.VisualizacaoFilaDTO;
 import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.SituacaoSenha;
+import dev.thiagogonzalez.filahovetapipoc.domain.model.Fila;
+import dev.thiagogonzalez.filahovetapipoc.domain.model.Sala;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Senha;
 import dev.thiagogonzalez.filahovetapipoc.domain.repository.SenhaRepository;
 import dev.thiagogonzalez.filahovetapipoc.service.FilaService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/fila")
@@ -38,4 +45,28 @@ public class FilaController {
     public VisualizacaoFilaDTO visualizarFila(@PathVariable Long filaId) {
         return filaService.visualizarFila(filaId);
     }
+
+    @GetMapping
+    public List<FilaDTO> findAll() {
+        return filaService.findAll().stream().map(FilaDTO::new).collect(Collectors.toList());
+    }
+
+    @PostMapping
+    public Fila save(@RequestBody Fila fila) {
+        return filaService.save(fila);
+    }
+
+    @PutMapping("{idFila}")
+    public Fila update(@PathVariable("idFila") Long idFila, @RequestBody Sala dadosNovosFila) {
+        Fila salaToUpdate = filaService.findById(idFila);
+
+        BeanUtils.copyProperties(dadosNovosFila, salaToUpdate, "id");
+        return filaService.save(salaToUpdate);
+    }
+
+    @DeleteMapping("{idFila}")
+    private Boolean delete(@PathVariable("idFila") Long idFila) {
+        return filaService.delete(idFila);
+    }
+
 }

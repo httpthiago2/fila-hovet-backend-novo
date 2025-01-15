@@ -27,6 +27,10 @@ public class Fila {
     private List<Senha> senhas;
 
     @ManyToOne
-    @JoinColumn(name = "sala_id", nullable = false)
+    @JoinColumn(name = "sala_id")
     private Sala sala;
+
+    @ManyToOne
+    @JoinColumn(name = "medico_id")
+    private Medico medico;
 }

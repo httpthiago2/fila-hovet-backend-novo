@@ -1,10 +1,9 @@
 package dev.thiagogonzalez.filahovetapipoc.domain.repository;
 
-import dev.thiagogonzalez.filahovetapipoc.domain.model.Fila;
+import dev.thiagogonzalez.filahovetapipoc.domain.model.Medico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FilaRepository extends JpaRepository<Fila, Long>{
-
+public interface MedicoRepository extends JpaRepository<Medico, Long> {
 }
