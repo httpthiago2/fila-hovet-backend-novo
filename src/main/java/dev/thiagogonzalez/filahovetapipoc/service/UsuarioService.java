@@ -1,5 +1,6 @@
 package dev.thiagogonzalez.filahovetapipoc.service;
 
+import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.TipoPerfil;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Usuario;
 import dev.thiagogonzalez.filahovetapipoc.domain.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
@@ -30,5 +31,9 @@ public class UsuarioService {
     public Boolean delete(Long id) {
         usuarioRepository.deleteById(id);
         return Boolean.TRUE;
+    }
+
+    public List<Usuario> findByTipoPerfil(TipoPerfil tipoPerfil) {
+        return usuarioRepository.findByPerfil(tipoPerfil);
     }
 }

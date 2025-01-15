@@ -2,6 +2,7 @@ package dev.thiagogonzalez.filahovetapipoc.service;
 
 import dev.thiagogonzalez.filahovetapipoc.domain.dto.VisualizacaoSenhaDTO;
 import dev.thiagogonzalez.filahovetapipoc.domain.dto.VisualizacaoFilaDTO;
+import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.SituacaoFila;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Fila;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Senha;
 import dev.thiagogonzalez.filahovetapipoc.domain.repository.FilaRepository;
@@ -61,6 +62,10 @@ public class FilaService {
             log.error(e.getMessage());
             return Boolean.FALSE;
         }
+    }
+
+    public List<Fila> findBySituacao(SituacaoFila situacaoFila) {
+        return filaRepository.findBySituacao(situacaoFila);
     }
 
 

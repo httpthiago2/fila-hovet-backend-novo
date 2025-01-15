@@ -1,6 +1,7 @@
 package dev.thiagogonzalez.filahovetapipoc.controller;
 
 import dev.thiagogonzalez.filahovetapipoc.domain.dto.UsuarioDTO;
+import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.TipoPerfil;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Usuario;
 import dev.thiagogonzalez.filahovetapipoc.service.UsuarioService;
 import org.springframework.beans.BeanUtils;
@@ -44,6 +45,13 @@ public class UsuarioController {
     @DeleteMapping("{idMedico}")
     private Boolean delete(@PathVariable("idMedico") Long idMedico) {
         return usuarioService.delete(idMedico);
+    }
+
+    @GetMapping("/find-by-perfil/{perfil}")
+    public List<UsuarioDTO> findByPerfil(@PathVariable("perfil") String perfil) {
+        return usuarioService
+                .findByTipoPerfil(TipoPerfil.valueOf(perfil)).stream().map(UsuarioDTO::new)
+                .collect(Collectors.toList());
     }
 
 }

@@ -1,5 +1,6 @@
 package dev.thiagogonzalez.filahovetapipoc.domain.model;
 
+import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.TipoPerfil;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,6 +23,9 @@ public class Usuario {
     private String usuario;
 
     private String senha;
+
+    @Enumerated(EnumType.STRING)
+    private TipoPerfil perfil;
 
     @OneToMany(mappedBy = "usuario")
     private List<Fila> filas = new ArrayList<>();
