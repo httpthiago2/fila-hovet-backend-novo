@@ -1,8 +1,11 @@
 package dev.thiagogonzalez.filahovetapipoc.controller;
 
 import dev.thiagogonzalez.filahovetapipoc.domain.dto.FilaDTO;
+import dev.thiagogonzalez.filahovetapipoc.domain.dto.UsuarioDTO;
 import dev.thiagogonzalez.filahovetapipoc.domain.dto.VisualizacaoFilaDTO;
+import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.SituacaoFila;
 import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.SituacaoSenha;
+import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.TipoPerfil;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Fila;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Sala;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Senha;
@@ -67,6 +70,18 @@ public class FilaController {
     @DeleteMapping("{idFila}")
     private Boolean delete(@PathVariable("idFila") Long idFila) {
         return filaService.delete(idFila);
+    }
+
+    @GetMapping("/find-by-situacao/{situacao}")
+    public List<FilaDTO> findByPerfil(@PathVariable("situacao") String situacao) {
+        return filaService
+                .findBySituacao(SituacaoFila.valueOf(situacao)).stream().map(FilaDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("{filaId}")
+    public FilaDTO findFilaById(@PathVariable("filaId") Long filaId) {
+        return new FilaDTO(filaService.findById(filaId));
     }
 
 }
