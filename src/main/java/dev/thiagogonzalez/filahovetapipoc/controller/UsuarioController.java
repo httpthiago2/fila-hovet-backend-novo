@@ -25,7 +25,15 @@ public class UsuarioController {
 
     @GetMapping
     public List<UsuarioDTO> findAll() {
-        return usuarioService.findAll().stream().map(UsuarioDTO::new).collect(Collectors.toList());
+        return usuarioService.findAll().stream().map(UsuarioDTO::new).map(usuarioDTO -> {
+            usuarioDTO.setSenha(null);
+            return usuarioDTO;
+        }).collect(Collectors.toList());
+    }
+
+    @GetMapping("{usuarioId}")
+    public UsuarioDTO findById(@PathVariable("usuarioId") Long usuarioId) {
+        return new UsuarioDTO(usuarioService.findById(usuarioId));
     }
 
     @PostMapping

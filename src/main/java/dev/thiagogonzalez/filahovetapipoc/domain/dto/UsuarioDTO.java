@@ -10,11 +10,13 @@ public class UsuarioDTO {
     private String nome;
     private String usuario;
     private TipoPerfil perfil;
+    private String senha;
 
     public UsuarioDTO(Usuario usuario) {
         this.id = usuario.getId();
         this.nome = usuario.getNome();
         this.usuario = usuario.getUsuario();
         this.perfil = usuario.getPerfil();
+        this.senha = usuario.getSenha();
     }
 }

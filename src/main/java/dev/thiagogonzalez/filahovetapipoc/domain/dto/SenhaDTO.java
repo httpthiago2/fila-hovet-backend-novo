@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class SenhaDTO {
+    private Long id;
     private String codigo;
     private String nomePet;
     private String nomeTutor;
@@ -22,6 +23,7 @@ public class SenhaDTO {
     private LocalDateTime dataCriacao;
 
     public SenhaDTO(Senha senha) {
+        this.id = senha.getId();
         this.codigo = senha.getFila().getCodigo().concat(StringUtils.leftPad(senha.getId().toString(), 3, '0'));
         this.nomePet = senha.getPet();
         this.nomeTutor = senha.getTutor();
