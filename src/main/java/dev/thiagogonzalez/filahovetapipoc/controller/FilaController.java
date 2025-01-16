@@ -36,7 +36,7 @@ public class FilaController {
         senhaAtual.setSituacao(SituacaoSenha.ATENDIDA);
         senhaRepository.save(senhaAtual);
         VisualizacaoFilaDTO visualizacaoFilaDTO = filaService.visualizarFila(filaId);
-        messagingTemplate.convertAndSend("/topic/fila/1", visualizacaoFilaDTO);
+        messagingTemplate.convertAndSend("/topic/fila/".concat(filaId.toString()), visualizacaoFilaDTO);
     }
 
 
