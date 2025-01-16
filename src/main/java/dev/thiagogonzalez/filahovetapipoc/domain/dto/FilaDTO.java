@@ -14,6 +14,7 @@ public class FilaDTO {
     private UsuarioDTO usuario;
     private SalaDTO sala;
 
+
     public FilaDTO(Fila fila) {
         this.id = fila.getId();
         this.codigo = fila.getCodigo();

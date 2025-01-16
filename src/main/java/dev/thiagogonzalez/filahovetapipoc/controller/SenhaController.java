@@ -1,6 +1,7 @@
 package dev.thiagogonzalez.filahovetapipoc.controller;
 
 import dev.thiagogonzalez.filahovetapipoc.domain.dto.SenhaDTO;
+import dev.thiagogonzalez.filahovetapipoc.domain.dto.SenhaEdicaoDTO;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Senha;
 import dev.thiagogonzalez.filahovetapipoc.service.SenhaService;
 import org.springframework.beans.BeanUtils;
@@ -22,6 +23,11 @@ public class SenhaController {
     @GetMapping
     public List<SenhaDTO> findAll() {
         return senhaService.findAll().stream().map(SenhaDTO::new).collect(Collectors.toList());
+    }
+
+    @GetMapping("{idSenha}")
+    public SenhaEdicaoDTO findById(@PathVariable("idSenha") Long idSenha) {
+        return new SenhaEdicaoDTO(senhaService.findById(idSenha));
     }
 
     @PostMapping

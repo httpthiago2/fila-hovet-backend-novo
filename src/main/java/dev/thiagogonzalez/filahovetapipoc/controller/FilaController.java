@@ -1,11 +1,9 @@
 package dev.thiagogonzalez.filahovetapipoc.controller;
 
 import dev.thiagogonzalez.filahovetapipoc.domain.dto.FilaDTO;
-import dev.thiagogonzalez.filahovetapipoc.domain.dto.UsuarioDTO;
 import dev.thiagogonzalez.filahovetapipoc.domain.dto.VisualizacaoFilaDTO;
 import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.SituacaoFila;
 import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.SituacaoSenha;
-import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.TipoPerfil;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Fila;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Sala;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Senha;

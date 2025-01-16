@@ -1,16 +1,13 @@
 package dev.thiagogonzalez.filahovetapipoc.domain.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.SituacaoSenha;
 import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.TipoSenha;
 import dev.thiagogonzalez.filahovetapipoc.domain.model.Senha;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
-import java.time.LocalDateTime;
-
 @Data
-public class SenhaDTO {
+public class SenhaEdicaoDTO {
     private Long id;
     private String codigo;
     private String nomePet;
@@ -19,11 +16,9 @@ public class SenhaDTO {
     private TipoSenha tipoSenha;
     private SituacaoSenha situacao;
     private Long ordem;
+    private FilaReduzidaDTO fila;
 
-    @JsonFormat(pattern = "dd/MM/yyyy hh:MM:ss")
-    private LocalDateTime dataCriacao;
-
-    public SenhaDTO(Senha senha) {
+    public SenhaEdicaoDTO(Senha senha) {
         this.id = senha.getId();
         this.codigo = senha.getFila().getCodigo().concat(StringUtils.leftPad(senha.getId().toString(), 3, '0'));
         this.nomePet = senha.getPet();
@@ -31,7 +26,7 @@ public class SenhaDTO {
         this.nomeFila = senha.getFila().getNome();
         this.tipoSenha = senha.getTipo();
         this.situacao = senha.getSituacao();
-        this.dataCriacao = senha.getDataCriacao();
+        this.fila = new FilaReduzidaDTO(senha.getFila());
         this.ordem = senha.getOrdem();
     }
 }

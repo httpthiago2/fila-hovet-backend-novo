@@ -25,7 +25,7 @@ public class Senha {
     private TipoSenha tipo;
 
     @Enumerated(EnumType.STRING)
-    private SituacaoSenha situacao;
+    private SituacaoSenha situacao = SituacaoSenha.PENDENTE_ATENDIMENTO;
 
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
