@@ -1,5 +1,6 @@
 package dev.thiagogonzalez.filahovetapipoc.service;
 
+import dev.thiagogonzalez.filahovetapipoc.domain.dto.SenhaDTO;
 import dev.thiagogonzalez.filahovetapipoc.domain.dto.VisualizacaoSenhaDTO;
 import dev.thiagogonzalez.filahovetapipoc.domain.dto.VisualizacaoFilaDTO;
 import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.SituacaoFila;
@@ -26,20 +27,38 @@ public class FilaService {
 
     public VisualizacaoFilaDTO visualizarFila(Long id) {
         Senha senhaEntidade = senhaRepository.findSenhaAtualByIdFila(id);
-        VisualizacaoSenhaDTO senhaNova = new VisualizacaoSenhaDTO(senhaEntidade);
+        SenhaDTO senhaNova = new SenhaDTO(senhaEntidade);
 
-        List<VisualizacaoSenhaDTO> senhasAnteriores = senhaRepository.findSenhasAtendidasByIdFila(id)
+        List<SenhaDTO> senhasAnteriores = senhaRepository.findSenhasAtendidasByIdFila(id)
                 .stream()
-                .map(VisualizacaoSenhaDTO::new).toList();
+                .map(SenhaDTO::new)
+                .toList();
+
+        List<SenhaDTO> proximasSenhas = senhaRepository.findProximasSenhas(id, senhaEntidade.getId())
+                .stream()
+                .map(SenhaDTO::new)
+                .toList();
 
 
         VisualizacaoFilaDTO visualizacaoFilaDTO = new VisualizacaoFilaDTO();
-        visualizacaoFilaDTO.setSenhaAtual(senhaNova);
+
+        // dados da fila
         visualizacaoFilaDTO.setNome(senhaEntidade.getFila().getNome());
         visualizacaoFilaDTO.setSala(senhaEntidade.getFila().getSala().getNome());
+
+        // senha atual
+        visualizacaoFilaDTO.setSenhaAtual(senhaNova);
+
+        // senhas anteriores
         visualizacaoFilaDTO.setSenhasAnteriores(senhasAnteriores);
+
+        // proximas senhas
+        visualizacaoFilaDTO.setProximasSenhas(proximasSenhas);
+
         return visualizacaoFilaDTO;
     }
+
+
 
     public List<Fila> findAll() {
         return filaRepository.findAll();
