@@ -41,4 +41,13 @@ public class SenhaController {
     private Boolean delete(@PathVariable("idSenha") Long idSenha) {
         return senhaService.delete(idSenha);
     }
+
+    @GetMapping("find-by-data")
+    public List<SenhaDTO> findMedicalRecordsByDate(@RequestParam String data, @RequestParam Long filaId) {
+        return senhaService
+                .findMedicalRecordsByDate(data, filaId)
+                .stream()
+                .map(SenhaDTO::new)
+                .toList();
+    }
 }

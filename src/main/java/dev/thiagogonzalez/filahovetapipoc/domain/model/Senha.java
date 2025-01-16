@@ -1,10 +1,14 @@
 package dev.thiagogonzalez.filahovetapipoc.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.SituacaoSenha;
 import dev.thiagogonzalez.filahovetapipoc.domain.enumeration.TipoSenha;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -22,6 +26,8 @@ public class Senha {
 
     @Enumerated(EnumType.STRING)
     private SituacaoSenha situacao;
+
+    private LocalDateTime dataCriacao = LocalDateTime.now();
 
     private String pet;
 

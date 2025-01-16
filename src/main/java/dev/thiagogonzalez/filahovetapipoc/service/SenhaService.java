@@ -4,6 +4,7 @@ import dev.thiagogonzalez.filahovetapipoc.domain.model.Senha;
 import dev.thiagogonzalez.filahovetapipoc.domain.repository.SenhaRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -35,5 +36,12 @@ public class SenhaService {
         } catch (Exception e) {
             return Boolean.FALSE;
         }
+    }
+
+    public List<Senha> findMedicalRecordsByDate(String data, Long filaId) {
+        if (data == null) {
+            data = LocalDateTime.now().toString();
+        }
+        return senhaRepository.queryFindByDate(data, filaId);
     }
 }
