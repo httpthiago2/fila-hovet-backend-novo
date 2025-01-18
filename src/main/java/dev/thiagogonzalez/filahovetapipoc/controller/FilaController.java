@@ -31,19 +31,15 @@ public class FilaController {
 
 
     @PostMapping("/chamar-proximo/{filaId}")
-    public void chamarProximo(@PathVariable Long filaId) {
-        Senha senhaAtual = senhaRepository.findSenhaAtualByIdFila(filaId);
-        senhaAtual.setSituacao(SituacaoSenha.ATENDIDA);
-        senhaRepository.save(senhaAtual);
-        VisualizacaoFilaDTO visualizacaoFilaDTO = filaService.visualizarFila(filaId);
-        messagingTemplate.convertAndSend("/topic/fila/".concat(filaId.toString()), visualizacaoFilaDTO);
+    public void chamarProximo(@PathVariable Long filaId) throws Exception {
+        filaService.chamarProximo(filaId);
     }
 
 
 
 
     @GetMapping("/visualizar/{filaId}")
-    public VisualizacaoFilaDTO visualizarFila(@PathVariable Long filaId) {
+    public VisualizacaoFilaDTO visualizarFila(@PathVariable Long filaId) throws Exception {
         return filaService.visualizarFila(filaId);
     }
 
