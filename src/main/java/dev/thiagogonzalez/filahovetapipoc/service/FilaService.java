@@ -32,17 +32,19 @@ public class FilaService {
     }
 
 
-    public void chamarProximo(Long filaId) throws Exception {
+    public VisualizacaoFilaDTO chamarProximo(Long filaId) throws Exception {
 
         // busca filas com o status EM_ATENDIMENTO
         Senha senhaAtual = senhaRepository.findSenhaAtualByIdFila(filaId);
 
         if (senhaAtual == null) {
             senhaAtual = senhaRepository.findProximaSenhaByIdFila(filaId);
+            if (senhaAtual == null) {
+                return visualizarFila(filaId);
+            }
             senhaAtual.setSituacao(SituacaoSenha.EM_ATENDIMENTO);
             senhaRepository.save(senhaAtual);
-            VisualizacaoFilaDTO visualizacaoFilaDTO = visualizarFila(filaId);
-            messagingTemplate.convertAndSend("/topic/fila/".concat(filaId.toString()), visualizacaoFilaDTO);
+            return visualizarFila(filaId);
         } else {
             senhaAtual.setSituacao(SituacaoSenha.ATENDIDA);
             senhaRepository.save(senhaAtual);
@@ -51,11 +53,8 @@ public class FilaService {
             senhaAtual.setSituacao(SituacaoSenha.EM_ATENDIMENTO);
             senhaRepository.save(senhaAtual);
 
-            VisualizacaoFilaDTO visualizacaoFilaDTO = visualizarFila(filaId);
-            messagingTemplate.convertAndSend("/topic/fila/".concat(filaId.toString()), visualizacaoFilaDTO);
+            return visualizarFila(filaId);
         }
-
-
     }
 
     public VisualizacaoFilaDTO visualizarFila(Long id) throws Exception {
@@ -97,6 +96,19 @@ public class FilaService {
         visualizacaoFilaDTO.setProximasSenhas(proximasSenhas);
 
         return visualizacaoFilaDTO;
+    }
+
+    public List<VisualizacaoFilaDTO> visualizarTodasFilas() throws Exception {
+
+        List<Fila> filas = filaRepository.findAll();
+        List<VisualizacaoFilaDTO> retorno = new ArrayList<>();
+
+
+        for (Fila fila : filas) {
+            retorno.add(visualizarFila(fila.getId()));
+        }
+
+        return retorno;
     }
 
 

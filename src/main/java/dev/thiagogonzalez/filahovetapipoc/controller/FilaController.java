@@ -31,16 +31,18 @@ public class FilaController {
 
 
     @PostMapping("/chamar-proximo/{filaId}")
-    public void chamarProximo(@PathVariable Long filaId) throws Exception {
-        filaService.chamarProximo(filaId);
+    public VisualizacaoFilaDTO chamarProximo(@PathVariable Long filaId) throws Exception {
+       return filaService.chamarProximo(filaId);
     }
-
-
-
 
     @GetMapping("/visualizar/{filaId}")
     public VisualizacaoFilaDTO visualizarFila(@PathVariable Long filaId) throws Exception {
         return filaService.visualizarFila(filaId);
+    }
+
+    @GetMapping("/buscar-filas-visualizacao")
+    public List<VisualizacaoFilaDTO> buscarFilasVisualizacao() throws Exception {
+        return filaService.visualizarTodasFilas();
     }
 
     @GetMapping

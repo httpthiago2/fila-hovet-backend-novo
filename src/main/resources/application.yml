@@ -2,11 +2,11 @@ spring:
   application:
     name: fila-hovet-api-poc
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: create-drop
   datasource:
-    url: jdbc:mysql://localhost/filahovet?serverTimezone=UTC
+    url: jdbc:mysql://localhost/filahovet?serverTimezone=UTC&createDatabaseIfNotExist=true
     username: root
     password: root
   kafka:
