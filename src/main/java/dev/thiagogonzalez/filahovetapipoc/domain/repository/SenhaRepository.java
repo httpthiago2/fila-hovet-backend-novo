@@ -19,7 +19,7 @@ public interface SenhaRepository extends JpaRepository<Senha, Long> {
     @Query("SELECT s FROM Senha s WHERE s.situacao = 'PENDENTE_ATENDIMENTO' AND s.fila.id = :idFila order by s.dataCriacao")
     public List<Senha> findProximasSenhas(@Param("idFila") Long idFila);
 
-    @Query("SELECT s FROM Senha s WHERE s.situacao = 'ATENDIDA' AND s.fila.id = :idFila order by s.ordem DESC")
+    @Query("SELECT s FROM Senha s WHERE s.situacao = 'ATENDIDA' AND s.fila.id = :idFila order by s.ordem DESC LIMIT 3")
     public List<Senha> findSenhasAtendidasByIdFila(@Param("idFila") Long idFila);
 
     @Query("SELECT s FROM Senha s WHERE DATE(s.dataCriacao) = DATE(:date) AND s.fila.id = :filaId")
